@@ -5,10 +5,9 @@ serwer="https://0to2.github.io"
 usage()
 {
     echo "
-Jak używać: ipxe [ -d ] [ -u ] [ -c ... ] | [ -h ]
+Jak używać: ipxe [ -d ] [ -c ... ] | [ -h ]
 
  -d ściągnij źródła
- -u załaduj na serwer omv1
  -c kompiluj - jaki iPXE budować
      zbychuk: buduję go dla mojej domowej sieci LAN (autor).
     internet: iPXE dla konfiguracji z poza sieci -zbychuk-.
@@ -25,8 +24,6 @@ fi
 while [ "$1" != "" ]; do
     case $1 in
         -d )          download="yes"
-                                ;;
-        -u )          upload="yes"
                                 ;;
         -c )          shift
                       net=$1
@@ -63,10 +60,10 @@ if [ "$compile" = "yes" ]; then
 dhcp
 chain --replace --autofree http://omv1:82/ipxe/setup.php
 " > ~/ipxe/src/embeded.ipxe
-                       ipxe_config="http://$serwer/ipxe/general.h"
+                       ipxe_config="$serwer/ipxe/general.h"
                                 ;;
-        internet )     ipxe_config="http://$serwer/ipxe/general.h"
-                       menu="http://$serwer/ipxe/inet.ipxe"
+        internet )     ipxe_config="$serwer/ipxe/general.h"
+                       menu="$serwer/ipxe/inet.ipxe"
                        curl -sSL $menu -o ~/ipxe/src/embeded.ipxe
                                 ;;
         * )            echo

@@ -14,7 +14,6 @@ usage()
     echo "
 Jak używać: wrt [ -w wersja ] [ -c ] | [ -h ]
  -w wersja OpenWRT do budowy (domyślne: $wersja)
- -u wysyła utworzony Image na serwer (jeśli skrypt działa w sieci -zbychuk-)
  -c kasuje z dysku i pobiera ponownie automatycznie ImageBuilder
  -h wyświetlenie tej instrukcji
 "
@@ -31,8 +30,6 @@ while [ "$1" != "" ]; do
                                 wersja=$1
                                 ;;
         -c | --clean )          clean="yes"
-                                ;;
-        -u )                    upload="yes"
                                 ;;
         -h | --help )           usage
                                 exit

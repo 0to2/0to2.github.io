@@ -124,10 +124,9 @@ serwer<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https
 usage<span style="color:#f92672">()</span>
 <span style="color:#f92672">{</span>
     echo <span style="color:#e6db74">&#34;
-</span><span style="color:#e6db74">Jak używać: ipxe [ -d ] [ -u ] [ -c ... ] | [ -h ]
+</span><span style="color:#e6db74">Jak używać: ipxe [ -d ] [ -c ... ] | [ -h ]
 </span><span style="color:#e6db74">
 </span><span style="color:#e6db74"> -d ściągnij źródła
-</span><span style="color:#e6db74"> -u załaduj na serwer omv1
 </span><span style="color:#e6db74"> -c kompiluj - jaki iPXE budować
 </span><span style="color:#e6db74">     zbychuk: buduję go dla mojej domowej sieci LAN (autor).
 </span><span style="color:#e6db74">    internet: iPXE dla konfiguracji z poza sieci -zbychuk-.
@@ -144,8 +143,6 @@ usage<span style="color:#f92672">()</span>
 <span style="color:#66d9ef">while</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span> !<span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">do</span>
     <span style="color:#66d9ef">case</span> $1 in
         -d <span style="color:#f92672">)</span>          download<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;yes&#34;</span>
-                                ;;
-        -u <span style="color:#f92672">)</span>          upload<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;yes&#34;</span>
                                 ;;
         -c <span style="color:#f92672">)</span>          shift
                       net<span style="color:#f92672">=</span>$1
@@ -182,10 +179,10 @@ mkdir -p ipxe-image
 </span><span style="color:#e6db74">dhcp
 </span><span style="color:#e6db74">chain --replace --autofree http://omv1:82/ipxe/setup.php
 </span><span style="color:#e6db74">&#34;</span> &gt; ~/ipxe/src/embeded.ipxe
-                       ipxe_config<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://</span>$serwer<span style="color:#e6db74">/ipxe/general.h&#34;</span>
+                       ipxe_config<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$serwer<span style="color:#e6db74">/ipxe/general.h&#34;</span>
                                 ;;
-        internet <span style="color:#f92672">)</span>     ipxe_config<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://</span>$serwer<span style="color:#e6db74">/ipxe/general.h&#34;</span>
-                       menu<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://</span>$serwer<span style="color:#e6db74">/ipxe/inet.ipxe&#34;</span>
+        internet <span style="color:#f92672">)</span>     ipxe_config<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$serwer<span style="color:#e6db74">/ipxe/general.h&#34;</span>
+                       menu<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$serwer<span style="color:#e6db74">/ipxe/inet.ipxe&#34;</span>
                        curl -sSL $menu -o ~/ipxe/src/embeded.ipxe
                                 ;;
         * <span style="color:#f92672">)</span>            echo
