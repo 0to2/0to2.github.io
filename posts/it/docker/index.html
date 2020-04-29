@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Docker - debian-wrt image - Zbychuk&#39;s Site</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Docker - debian-wrt image - 0to2&#39;s Site</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta property="og:title" content="Docker - debian-wrt image" />
 <meta property="og:description" content="Generowanie obrazu systemu Debian przydatnego do tworzenia obrazów OpenWRT." />
 <meta property="og:type" content="article" />
@@ -22,7 +22,7 @@
 		<div class="content">
 <header>
 <div class="main">
-	<a href="/">Zbychuk&#39;s Site</a>
+	<a href="/">0to2&#39;s Site</a>
 </div>
 <nav>
 			
@@ -62,18 +62,7 @@ apt install -y mc gawk python aptitude links wget curl build-essential genisoima
 </span><span style="color:#ae81ff"></span> libncurses5-dev zlib1g-dev isolinux git gettext libssl-dev xsltproc liblzma-dev <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span> dnsutils
 
-myIP<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>curl -q ifconfig.me 2&gt; /dev/null<span style="color:#e6db74">`</span>
-siteIP<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>dig +short zbychuk.sly.io<span style="color:#e6db74">`</span>
-
-echo <span style="color:#e6db74">&#34;</span>$myIP<span style="color:#e6db74">
-</span><span style="color:#e6db74"></span>$siteIP<span style="color:#e6db74">&#34;</span>
-
-<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$myIP<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;</span>$siteIP<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>
-<span style="color:#66d9ef">then</span>
-    server<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;omv1:90&#34;</span>
-<span style="color:#66d9ef">else</span>
-    server<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;zbychuk.sly.io:90&#34;</span>
-<span style="color:#66d9ef">fi</span>
+    server<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://0to2.github.io&#34;</span>
 
 cd /usr/local/bin
 wget http://$server/openwrt/wrt

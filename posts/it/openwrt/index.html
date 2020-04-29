@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>OpenWRT Image Builder - Zbychuk&#39;s Site</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>OpenWRT Image Builder - 0to2&#39;s Site</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta property="og:title" content="OpenWRT Image Builder" />
 <meta property="og:description" content="Jak generować obrazy systemu do punktów WiFi AP opartych na Raspberry Pi Zero W." />
 <meta property="og:type" content="article" />
@@ -22,7 +22,7 @@
 		<div class="content">
 <header>
 <div class="main">
-	<a href="/">Zbychuk&#39;s Site</a>
+	<a href="/">0to2&#39;s Site</a>
 </div>
 <nav>
 			
@@ -47,16 +47,7 @@
 <p>Aby wygenerować obrazy dla moich urządzeń należy użyć skryptu <em><strong>wrt</strong></em>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/bin/bash
 </span><span style="color:#75715e"></span>
-myIP<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>curl -q ifconfig.me 2&gt; /dev/null<span style="color:#e6db74">`</span>
-siteIP<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>dig +short zbychuk.sly.io<span style="color:#e6db74">`</span>
-
-echo <span style="color:#e6db74">&#34;</span>$myIP<span style="color:#e6db74">
-</span><span style="color:#e6db74"></span>$siteIP<span style="color:#e6db74">&#34;</span>
-
-<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$myIP<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;</span>$siteIP<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>
-<span style="color:#66d9ef">then</span> server<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://omv1:90&#34;</span>
-<span style="color:#66d9ef">else</span> server<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://zbychuk.sly.io:90&#34;</span>
-<span style="color:#66d9ef">fi</span>
+server<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://0to2.github.io&#34;</span>
 
 <span style="color:#75715e"># Wersja RPi dla generowanego obrazu.</span>
 #
@@ -148,10 +139,6 @@ echo <span style="color:#e6db74">&#34;Generuję obrazy ...&#34;</span>
 <span style="color:#66d9ef">done</span>
 cp $0 $HOME/openwrt-$wersja-images/
 
-<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$upload<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;yes&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
-    echo <span style="color:#e6db74">&#34;Wysyłam na serwer ...&#34;</span>
-    scp -r $HOME/openwrt-$wersja-images omv1://sharedfolders/sysimages/openwrt
-<span style="color:#66d9ef">fi</span>
 </code></pre></div><hr>
 <p>Kilka ciekawych stron na powyższy temat:</p>
 <ul>

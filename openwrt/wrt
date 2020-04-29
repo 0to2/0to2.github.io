@@ -1,15 +1,6 @@
 #!/bin/bash
 
-myIP=`curl -q ifconfig.me 2> /dev/null`
-siteIP=`dig +short zbychuk.sly.io`
-
-echo "$myIP
-$siteIP"
-
-if [ "$myIP" == "$siteIP" ]
-then server="http://omv1:90"
-else server="http://zbychuk.sly.io:90"
-fi
+server="https://0to2.github.io"
 
 # Wersja RPi dla generowanego obrazu.
 #
@@ -81,8 +72,8 @@ for ap in ap1; do
     # RPi 1 B + ath9k WiFi USB card
     cd $HOME/wrt-$wersja/openwrt-imagebuilder-$wersja-brcm2708-$rpi.Linux-x86_64
     make image PACKAGES="luci luci-app-firewall luci-base luci-lib-ip luci-lib-jsonc \
-	luci-lib-nixio luci-mod-admin-full luci-proto-ipv6 luci-proto-ppp luci-theme-bootstrap \
-	mc curl nano kmod-ath9k-htc" FILES=../../wrt-config/$ap/
+    luci-lib-nixio luci-mod-admin-full luci-proto-ipv6 luci-proto-ppp luci-theme-bootstrap \
+    mc curl nano kmod-ath9k-htc" FILES=../../wrt-config/$ap/
     mkdir -p $HOME/openwrt-$wersja-images/$ap
     mv bin/targets/brcm2708/$rpi/* $HOME/openwrt-$wersja-images/$ap
     cd
@@ -92,16 +83,11 @@ for ap in ap2 ap3; do
     # RPi Zero W + rtl8152 USB Ethernet
     cd $HOME/wrt-$wersja/openwrt-imagebuilder-$wersja-brcm2708-$rpi.Linux-x86_64
     make image PACKAGES="luci luci-app-firewall luci-base luci-lib-ip luci-lib-jsonc \
-	luci-lib-nixio luci-mod-admin-full luci-proto-ipv6 luci-proto-ppp luci-theme-bootstrap \
-	mc curl nano kmod-usb-net-rtl8152" FILES=../../wrt-config/$ap/
+    luci-lib-nixio luci-mod-admin-full luci-proto-ipv6 luci-proto-ppp luci-theme-bootstrap \
+    mc curl nano kmod-usb-net-rtl8152" FILES=../../wrt-config/$ap/
     mkdir -p $HOME/openwrt-$wersja-images/$ap
     mv bin/targets/brcm2708/$rpi/* $HOME/openwrt-$wersja-images/$ap
     cd
     tar cvfJ $HOME/openwrt-$wersja-images/$ap/$ap-config.tar.xz wrt-config/$ap
 done
 cp $0 $HOME/openwrt-$wersja-images/
-
-if [ "$upload" = "yes" ]; then
-    echo "Wysyłam na serwer ..."
-    scp -r $HOME/openwrt-$wersja-images omv1://sharedfolders/sysimages/openwrt
-fi

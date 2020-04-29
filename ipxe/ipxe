@@ -1,14 +1,6 @@
 #!/bin/bash
-myIP=`curl -q ifconfig.me 2> /dev/null`
-siteIP=`dig +short zbychuk.sly.io`
 
-echo "$myIP
-$siteIP"
-
-if [ "$myIP" == "$siteIP" ]
-then internet="no"
-else internet="yes"
-fi
+serwer="https://0to2.github.io"
 
 usage()
 {
@@ -40,8 +32,6 @@ while [ "$1" != "" ]; do
                       net=$1
                       compile="yes"
                                 ;;
-        -v )          verbose="yes"
-                                ;;
         -h | --help )           usage
                                 exit
                                 ;;
@@ -69,19 +59,13 @@ fi
 
 if [ "$compile" = "yes" ]; then
     case $net in
-        zbychuk )      serwer="omv1:82"
-                       echo "#!ipxe
+        zbychuk )      echo "#!ipxe
 dhcp
 chain --replace --autofree http://omv1:82/ipxe/setup.php
 " > ~/ipxe/src/embeded.ipxe
-                       serwer="omv1:90"
                        ipxe_config="http://$serwer/ipxe/general.h"
                                 ;;
-        internet )     serwer="omv1:90"
-                           if [ "$internet" = "yes" ]; then
-                               serwer="zbychuk.sly.io:90"
-                           fi
-                       ipxe_config="http://$serwer/ipxe/general.h"
+        internet )     ipxe_config="http://$serwer/ipxe/general.h"
                        menu="http://$serwer/ipxe/inet.ipxe"
                        curl -sSL $menu -o ~/ipxe/src/embeded.ipxe
                                 ;;
@@ -97,24 +81,10 @@ chain --replace --autofree http://omv1:82/ipxe/setup.php
     make clean
     make bin/ipxe.iso EMBED=embeded.ipxe
     make bin/ipxe.usb EMBED=embeded.ipxe
+    #make bin-x86_64-efi/ipxe.efi EMBED=embeded.ipxe
     cp bin/ipxe.lkrn bin/ipxe.usb bin/ipxe.iso ~/ipxe-image/$net
+    # bin-x86_64-efi/ipxe.efi
     cp ~/ipxe/src/config/general.h ~/ipxe-image/$net/
     cp embeded.ipxe ~/ipxe-image/$net/
     cp $0 ~/ipxe-image/$net/
-fi
-
-if [ "$upload" = "yes" ]; then
-    scp -r $HOME/ipxe-image/$net zbychuk@omv1:/sharedfolders/sysimages/ipxe/
-    if [ "$net" = "zbychuk" ]; then
-    scp -r $HOME/ipxe-image/$net/ipxe.lkrn zbychuk@omv1:/sharedfolders/tftp/ipxe/
-    fi
-fi
-
-if [ "$verbose" = "yes" ]; then
-    echo "compile:     $compile
-internet:    $internet
-net:         $net
-menu:        $menu
-ipxe_config: $ipxe_config
-"
 fi

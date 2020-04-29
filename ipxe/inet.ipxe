@@ -1,20 +1,8 @@
 #!ipxe
 # zbychuk set to "yes" already
 
-isset ${zbychuk} && goto zbychuk_yes || goto zbychuk_no
-
-:zbychuk_no
 dhcp
-set serwer zbychuk.sly.io:90
-goto zbychuk_
+set serwer https://0to2.github.io
 
-:zbychuk_yes
-set serwer omv1:90
-goto zbychuk_
-
-:zbychuk_
-
-
-:inet_menu
 set www-url http://${serwer}/ipxe/menu.ipxe
 chain --replace --autofree ${www-url}
