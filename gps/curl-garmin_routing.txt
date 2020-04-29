@@ -10,3 +10,4 @@ then zflag="-z $file"
 else zflag=
 fi
 curl -s -o "$file" $zflag "$uri"
+
