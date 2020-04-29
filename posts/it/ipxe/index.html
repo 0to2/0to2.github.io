@@ -197,9 +197,7 @@ mkdir -p ipxe-image
     make clean
     make bin/ipxe.iso EMBED<span style="color:#f92672">=</span>embeded.ipxe
     make bin/ipxe.usb EMBED<span style="color:#f92672">=</span>embeded.ipxe
-    <span style="color:#75715e">#make bin-x86_64-efi/ipxe.efi EMBED=embeded.ipxe</span>
     cp bin/ipxe.lkrn bin/ipxe.usb bin/ipxe.iso ~/ipxe-image/$net
-    <span style="color:#75715e"># bin-x86_64-efi/ipxe.efi</span>
     cp ~/ipxe/src/config/general.h ~/ipxe-image/$net/
     cp embeded.ipxe ~/ipxe-image/$net/
     cp $0 ~/ipxe-image/$net/
