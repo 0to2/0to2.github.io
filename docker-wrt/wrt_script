@@ -6,26 +6,15 @@ apt install -y mc gawk python aptitude links wget curl build-essential genisoima
  libncurses5-dev zlib1g-dev isolinux git gettext libssl-dev xsltproc liblzma-dev \
  dnsutils
 
-myIP=`curl -q ifconfig.me 2> /dev/null`
-siteIP=`dig +short zbychuk.sly.io`
-
-echo "$myIP
-$siteIP"
-
-if [ "$myIP" == "$siteIP" ]
-then
-    server="omv1:90"
-else
-    server="zbychuk.sly.io:90"
-fi
+server="https://0to2.github.io"
 
 cd /usr/local/bin 
-wget http://$server/openwrt/wrt
-wget http://$server/ipxe/ipxe
+wget $server/openwrt/wrt
+wget $server/ipxe/ipxe
 chmod +x *
 
 cd /
-wget http://$server:90/docker-wrt/.config/mc.tar.gz
+wget $server/docker-wrt/.config/mc.tar.gz
 mkdir -p /root/.config
 cd /root/.config
 tar xvfz /mc.tar.gz

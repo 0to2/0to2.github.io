@@ -78,9 +78,7 @@ chain --replace --autofree http://omv1:82/ipxe/setup.php
     make clean
     make bin/ipxe.iso EMBED=embeded.ipxe
     make bin/ipxe.usb EMBED=embeded.ipxe
-    #make bin-x86_64-efi/ipxe.efi EMBED=embeded.ipxe
     cp bin/ipxe.lkrn bin/ipxe.usb bin/ipxe.iso ~/ipxe-image/$net
-    # bin-x86_64-efi/ipxe.efi
     cp ~/ipxe/src/config/general.h ~/ipxe-image/$net/
     cp embeded.ipxe ~/ipxe-image/$net/
     cp $0 ~/ipxe-image/$net/
